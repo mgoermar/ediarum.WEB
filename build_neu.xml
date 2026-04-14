@@ -1,0 +1,17 @@
+<project name="ediarum_hab.web" default="build-xar">
+    <!-- set global properties -->
+    <property name="source-dir" value="."/>
+    <property name="package-dir" value="./build"/>
+    <property name="app-name" value="ediarum_hab.web"/>
+    <property name="app-version" value="0.1"/>
+    <target name="build-xar" description="Generate Application xar archive file">
+        <echo>Making Package for ${app-name} use source from ${source-dir}</echo>
+        <zip destfile="${package-dir}/${app-name}-${app-version}.xar">
+            <fileset dir="${source-dir}">
+                <include name="**/*.*"/>
+                <exclude name="**/.svn"/>
+            </fileset>
+        </zip>
+        <echo>Package is stored at ${package-dir}/${app-name}-${app-version}.xar</echo>
+    </target>
+</project>
