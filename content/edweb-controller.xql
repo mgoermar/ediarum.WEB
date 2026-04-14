@@ -226,7 +226,7 @@ declare
         "/api/ObjectType/ID/PART"
     ) 
     %test:assertEquals(
-        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/part.xml"><set-attribute name="object-type" value="ObjectType"/><set-attribute name="object-id" value="ID"/><set-attribute name="object-part" value="PART"/></forward></dispatch>'
+        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/part.xml"><set-attribute name="object-type" value="ObjectType"/><set-attribute name="object-id" value="ID"/><set-attribute name="object-part" value="PART"/></forward><cache-control cache="yes"/></dispatch>'
     )
 
     %test:args(
@@ -236,7 +236,7 @@ declare
         "/api/ObjectType/ID/PART.SUBPART"
     ) 
     %test:assertEquals(
-        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/part.xml"><set-attribute name="object-type" value="ObjectType"/><set-attribute name="object-id" value="ID"/><set-attribute name="object-part" value="PART.SUBPART"/></forward></dispatch>'
+        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/part.xml"><set-attribute name="object-type" value="ObjectType"/><set-attribute name="object-id" value="ID"/><set-attribute name="object-part" value="PART.SUBPART"/></forward><cache-control cache="yes"/></dispatch>'
     )
 
     %test:args(
@@ -246,7 +246,7 @@ declare
         "/api/ObjectType/ID/PART.SUBPART"
     ) 
     %test:assertEquals(
-        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/ObjectType.xml"><set-attribute name="object-type" value="ObjectType"/><set-attribute name="object-id" value="ID"/><set-attribute name="object-part" value="PART.SUBPART"/></forward></dispatch>'
+        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/ObjectType.xml"><set-attribute name="object-type" value="ObjectType"/><set-attribute name="object-id" value="ID"/><set-attribute name="object-part" value="PART.SUBPART"/></forward><cache-control cache="yes"/></dispatch>'
     )
 
     %test:args(
@@ -256,7 +256,7 @@ declare
         "/api/handschriften/diktyon-71816"
     )
     %test:assertEquals(
-        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/object-json.xql"><set-attribute name="object-type" value="handschriften"/><set-attribute name="object-id" value="diktyon-71816"/></forward></dispatch>'
+        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/object-json.xql"><set-attribute name="object-type" value="handschriften"/><set-attribute name="object-id" value="diktyon-71816"/></forward><cache-control cache="yes"/></dispatch>'
     )
 
     %test:args(
@@ -266,7 +266,7 @@ declare
         "/api/urn:cts:myproject/my-file:with.dot"
     )
     %test:assertEquals(
-        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/object-json.xql"><set-attribute name="object-type" value="urn:cts:myproject"/><set-attribute name="object-id" value="my-file:with.dot"/></forward></dispatch>'
+        '<dispatch xmlns="http://exist.sourceforge.net/NS/exist"><forward url="/ediarum.web/views/api/object-json.xql"><set-attribute name="object-type" value="urn:cts:myproject"/><set-attribute name="object-id" value="my-file:with.dot"/></forward><cache-control cache="yes"/></dispatch>'
     )
     (: TODO: weiteren Zugang legen nach DTS Spezi :)
     (: %test:args(
@@ -373,6 +373,7 @@ declare function edwebcontroller:generate-path(
                     </view>
                 else ()
             }
+            <cache-control cache="yes"/>
         </dispatch>
     )
     else ()
@@ -672,8 +673,9 @@ declare function edwebcontroller:pass-through(
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <error-handler>
                 <forward url="{edwebcontroller:get-exist-controller()}/views/static-pages/error-page.html" method="get"/>
-                <forward url="{edwebcontroller:get-exist-controller()}/modules/view.xql"/>
+(:                <forward url="{edwebcontroller:get-exist-controller()}/modules/view.xql"/>:)
             </error-handler>
+            <cache-control cache="yes"/>
         </dispatch>
     )
     else ()
@@ -772,8 +774,9 @@ declare function edwebcontroller:redirect-to-id(
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                 <error-handler>
                     <forward url="{edwebcontroller:get-exist-controller()}/views/static-pages/error-page.html" method="get"/>
-                    <forward url="{edwebcontroller:get-exist-controller()}/modules/view.xql"/>
+(:                    <forward url="{edwebcontroller:get-exist-controller()}/modules/view.xql"/>:)
                 </error-handler>
+                <cache-control cache="yes"/>
             </dispatch>
         }
     )
@@ -841,8 +844,9 @@ declare function edwebcontroller:view-with-feed(
             <error-handler>
                 <forward url="{edwebcontroller:get-exist-controller()}/views/static-pages/error-page.html" 
                          method="get"/>
-                <forward url="{edwebcontroller:get-exist-controller()}/modules/view.xql"/>
+(:                <forward url="{edwebcontroller:get-exist-controller()}/modules/view.xql"/>:)
             </error-handler>
+            <cache-control cache="yes"/>
         </dispatch>
     )
     else ()
